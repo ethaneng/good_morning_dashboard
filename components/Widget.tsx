@@ -7,22 +7,14 @@ export interface WidgetInterface  {
     x: number,
     y: number,
     size: 'small' | 'big' | 'tall' | 'wide' | string // where string is a custom tailwind size
+    headerColor?: string,
 }
 
-interface WidgetSettings {
-    headerColor: string,
-    bgColor: string,
-    textColor: string
-}
+const DEFAULT_HEADER_COLOR = 'bg-yellow-400'
 
-export default function Widget({x, y, size, children} : PropsWithChildren<WidgetInterface>) {
+export default function Widget({x, y, size, headerColor = DEFAULT_HEADER_COLOR,  children} : PropsWithChildren<WidgetInterface>) {
 
-    const [settings, setSettings] = useState<WidgetSettings>({
-        headerColor: '#ffffff',
-        bgColor: '#ffffff',
-        textColor: '#dddddd'
-    })
-
+    const [currentHeaderColor, setCurrentHeaderColor] = useState<string>(headerColor)
     const [showSettings, setShowSettings] = useState<boolean>(true)
 
     function toggleSettings() {
@@ -43,14 +35,14 @@ export default function Widget({x, y, size, children} : PropsWithChildren<Widget
     <Draggable handle='.handle' bounds='parent'>
         <div className={sizeClasses + ' absolute rounded border border-slate-600 flex flex-col'} style={style}>
 
-            <div className='widget-header rounded-t border-b border-slate-600 bg-slate-200 flex justify-between items-center p-1'>
-                <label className='cursor-pointer' onClick={toggleSettings}>SETTINGS</label>
+            <div className={`widget-header rounded-t border-b border-slate-600 flex justify-between items-center p-1 ${true ? currentHeaderColor : ''}`}>
+                <span className='cursor-pointer' onClick={toggleSettings}>SETTINGS</span>
                 <label className='handle cursor-pointer'>DRAG</label>
             </div>
 
             <div className='widget-content relative flex flex-grow bg-gradient-to-b from-white to-blue-100'>
-                <div className={`settings-overlay flex flex-col items-start p-2 z-20 absolute w-full h-full bg-pink-200 ${showSettings ? 'visible' : 'invisible'}`}>
-                    <ColorPicker />
+                <div className={`settings-overlay flex flex-col gap-2 items-start bg-white p-2 z-20 absolute w-full h-full overflow-y-auto ${showSettings ? 'visible' : 'invisible'}`}>
+                    <ColorPicker label={'Header Color:'} color={currentHeaderColor} setColor={setCurrentHeaderColor}/>
                 </div>
 
                 <div className='widget-children h-full w-full'>
