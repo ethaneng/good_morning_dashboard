@@ -5,3 +5,11 @@
 * {
     box-sizing: border-box;
 }
+
+.handle {
+    cursor: grab;
+}
+
+.handle:active {
+    cursor: grabbing
+}

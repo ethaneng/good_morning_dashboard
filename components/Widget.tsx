@@ -2,6 +2,7 @@
 import {PropsWithChildren, useState} from 'react'
 import Draggable from 'react-draggable';
 import ColorPicker from './ColorPicker';
+import { IoSettingsOutline } from 'react-icons/io5'
 
 export interface WidgetInterface  {
     x: number,
@@ -15,7 +16,7 @@ const DEFAULT_HEADER_COLOR = 'bg-yellow-400'
 export default function Widget({x, y, size, headerColor = DEFAULT_HEADER_COLOR,  children} : PropsWithChildren<WidgetInterface>) {
 
     const [currentHeaderColor, setCurrentHeaderColor] = useState<string>(headerColor)
-    const [showSettings, setShowSettings] = useState<boolean>(true)
+    const [showSettings, setShowSettings] = useState<boolean>(false)
 
     function toggleSettings() {
         setShowSettings(!showSettings)
@@ -35,9 +36,11 @@ export default function Widget({x, y, size, headerColor = DEFAULT_HEADER_COLOR, 
     <Draggable handle='.handle' bounds='parent'>
         <div className={sizeClasses + ' absolute rounded border border-slate-600 flex flex-col'} style={style}>
 
-            <div className={`widget-header rounded-t border-b border-slate-600 flex justify-between items-center p-1 ${true ? currentHeaderColor : ''}`}>
-                <span className='cursor-pointer' onClick={toggleSettings}>SETTINGS</span>
-                <label className='handle cursor-pointer'>DRAG</label>
+            <div className={`widget-header rounded-t border-b border-slate-600 flex justify-start items-center hover:brightness-110 ${true ? currentHeaderColor : ''}`}>
+                <button className='cursor-pointer p-1' onClick={toggleSettings}>
+                    <IoSettingsOutline className='opacity-80'/>
+                </button>
+                <div className='handle grow-1 h-full w-full'/>
             </div>
 
             <div className='widget-content relative flex flex-grow bg-gradient-to-b from-white to-blue-100'>
