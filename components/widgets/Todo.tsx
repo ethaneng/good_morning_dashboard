@@ -2,7 +2,6 @@
 
 import React, {useState} from 'react'
 import Widget from '../Widget'
-import { v4 } from 'uuid'
 
 interface Props {
     x: number,
@@ -21,7 +20,7 @@ export default function Todo({x, y}: Props) {
     const [newTodo, setNewTodo] = useState<string>("")
 
     function handleAddTodo() {
-        setTodos([...todos, {name: newTodo, completed: false, id: v4() as string}])
+        setTodos([...todos, {name: newTodo, completed: false, id: crypto.randomUUID()}])
         setNewTodo("")
     }
 

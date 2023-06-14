@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import Widget, { WidgetInterface } from '../Widget';
+import Widget from '../Widget';
 
 interface Props {
     x: number,
