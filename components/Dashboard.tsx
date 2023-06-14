@@ -1,17 +1,19 @@
 "use client"
 
-import {useEffect, useState} from 'react'
+import {createContext, useState} from 'react'
 import Clock from './widgets/Clock'
 import QOTD from './widgets/QOTD'
 import Todo from './widgets/Todo'
 import Menu from './Menu'
 
-type DashboardWidget = {
+export type DashboardWidget = {
   id: string,
   x: number,
   y: number,
   type: 'Clock' | 'QOTD' | 'Todo'
 }
+
+export const WidgetsContext = createContext<any>(null)
 
 function Dashboard() {
 
@@ -31,14 +33,16 @@ function Dashboard() {
   ])
 
   return (
-    <div className='dashboard relative flex-grow'>
-        <Menu />
-        {widgets.map((widget) => {
-          if (widget.type === 'Clock') return <Clock key={widget.id} x={widget.x} y={widget.y} />
-          if (widget.type === 'QOTD') return <QOTD key={widget.id} x={widget.x} y={widget.y} />
-          if (widget.type === 'Todo') return <Todo key={widget.id} x={widget.x} y={widget.y} />
-        })}
-    </div>
+    <WidgetsContext.Provider value={{widgets, setWidgets}}>
+      <div className='dashboard relative flex-grow'>
+          <Menu />
+          {widgets.map((widget) => {
+            if (widget.type === 'Clock') return <Clock key={widget.id} x={widget.x} y={widget.y} uid={widget.id}/>
+            if (widget.type === 'QOTD') return <QOTD key={widget.id} x={widget.x} y={widget.y} uid={widget.id}/>
+            if (widget.type === 'Todo') return <Todo key={widget.id} x={widget.x} y={widget.y} uid={widget.id}/>
+          })}
+      </div>
+    </WidgetsContext.Provider>
   )
 }
 

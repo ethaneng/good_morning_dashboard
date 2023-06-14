@@ -1,10 +1,12 @@
 "use client"
-import {PropsWithChildren, useState} from 'react'
+import {PropsWithChildren, useContext, useState} from 'react'
 import Draggable from 'react-draggable';
 import ColorPicker from './ColorPicker';
 import { IoEllipsisHorizontal, IoClose } from 'react-icons/io5'
+import { DashboardWidget, WidgetsContext } from './Dashboard';
 
 export interface WidgetInterface  {
+    uid: string,
     x: number,
     y: number,
     size: 'small' | 'big' | 'tall' | 'wide' | string // where string is a custom tailwind size
@@ -13,13 +15,26 @@ export interface WidgetInterface  {
 
 const DEFAULT_HEADER_COLOR = 'bg-yellow-400'
 
-export default function Widget({x, y, size, headerColor = DEFAULT_HEADER_COLOR,  children} : PropsWithChildren<WidgetInterface>) {
+export default function Widget({uid, x, y, size, headerColor = DEFAULT_HEADER_COLOR,  children} : PropsWithChildren<WidgetInterface>) {
 
     const [currentHeaderColor, setCurrentHeaderColor] = useState<string>(headerColor)
     const [showSettings, setShowSettings] = useState<boolean>(false)
 
+    const { widgets, setWidgets } = useContext(WidgetsContext)
+
     function toggleSettings() {
         setShowSettings(!showSettings)
+    }
+
+    function handleDelete(uid: string) {
+        setWidgets(widgets.filter((widget: DashboardWidget) => {
+            if (widget.id === uid) {
+                return false
+            }
+            else {
+                return true
+            }
+        }))
     }
 
     const style = {left: x, top: y}
@@ -44,7 +59,7 @@ export default function Widget({x, y, size, headerColor = DEFAULT_HEADER_COLOR, 
                 <div className='handle grow-1 h-full w-full'/>
 
                 <button className='cursor-pointer p-1 hover:bg-white hover:bg-opacity-20' >
-                    <IoClose className='opacity-80'/>
+                    <IoClose className='opacity-80' onClick={() => handleDelete(uid)}/>
                 </button>
             </div>
 

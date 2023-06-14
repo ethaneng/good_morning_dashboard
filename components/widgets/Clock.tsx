@@ -5,10 +5,11 @@ import Widget from '../Widget';
 
 interface Props {
     x: number,
-    y: number
+    y: number,
+    uid: string
 }
 
-function Clock({x, y} : Props){
+function Clock({x, y, uid} : Props){
 
   const [date, setDate] = useState<Date>();
   
@@ -24,7 +25,7 @@ function Clock({x, y} : Props){
   }, []);
 
   return (
-    <Widget x={x} y={y} size='small'>
+    <Widget x={x} y={y} size='small' uid={uid}>
         <div className='flex justify-center items-center h-full w-full'>
             <span className='font-bold md:text-3xl text-xl'>
                 {date ? date.toLocaleTimeString() : "Initialising"}

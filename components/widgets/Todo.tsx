@@ -5,7 +5,8 @@ import Widget from '../Widget'
 
 interface Props {
     x: number,
-    y: number
+    y: number,
+    uid: string
 }
 
 type Todo = {
@@ -14,7 +15,7 @@ type Todo = {
     id: string
 }
 
-export default function Todo({x, y}: Props) {
+export default function Todo({x, y, uid}: Props) {
 
     const [todos, setTodos] = useState<Todo[]>([])
     const [newTodo, setNewTodo] = useState<string>("")
@@ -47,7 +48,7 @@ export default function Todo({x, y}: Props) {
     }
 
   return (
-    <Widget x={x} y={y} size="tall">
+    <Widget x={x} y={y} size="tall" uid={uid}>
         <div className='w-full h-[50px] flex flex-col p-2 gap-2'>
             <div>
                 <label>New Todo:</label>
