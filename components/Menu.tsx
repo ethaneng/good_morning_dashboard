@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Menu() {
   return (
-    <ul className='fixed bottom-4 right-4 flex flex-col-reverse items-center gap-4 group'>
+    <ul className='fixed z-20 bottom-4 right-4 flex flex-col-reverse items-center gap-4 group'>
         <li className=''>
             <button className='rounded outline p-2'>NEW</button>
         </li>
