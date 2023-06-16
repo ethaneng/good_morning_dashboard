@@ -29,6 +29,9 @@ export default function Menu() {
         <li className='hidden group-hover:block'>
             <button onClick={() => addWidget('QOTD')} className='rounded outline p-2'>Quote</button>
         </li>
+        <li className='hidden group-hover:block'>
+            <button onClick={() => addWidget('Weather')} className='rounded outline p-2'>Weather</button>
+        </li>
     </ul>
   )
 }

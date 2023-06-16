@@ -5,12 +5,13 @@ import Clock from './widgets/Clock'
 import QOTD from './widgets/QOTD'
 import Todo from './widgets/Todo'
 import Menu from './Menu'
+import Weather from './widgets/Weather'
 
 export type DashboardWidget = {
   id: string,
   x: number,
   y: number,
-  type: 'Clock' | 'QOTD' | 'Todo'
+  type: 'Clock' | 'QOTD' | 'Todo' | 'Weather'
 }
 
 export const WidgetsContext = createContext<any>(null)
@@ -28,7 +29,7 @@ function Dashboard() {
       id: crypto.randomUUID(),
       x: 300,
       y: 50,
-      type: 'QOTD'
+      type: 'Weather'
     }
   ])
 
@@ -40,6 +41,7 @@ function Dashboard() {
             if (widget.type === 'Clock') return <Clock key={widget.id} x={widget.x} y={widget.y} uid={widget.id}/>
             if (widget.type === 'QOTD') return <QOTD key={widget.id} x={widget.x} y={widget.y} uid={widget.id}/>
             if (widget.type === 'Todo') return <Todo key={widget.id} x={widget.x} y={widget.y} uid={widget.id}/>
+            if (widget.type === 'Weather') return <Weather key={widget.id} x={widget.x} y={widget.y} uid={widget.id}/>
           })}
       </div>
     </WidgetsContext.Provider>
