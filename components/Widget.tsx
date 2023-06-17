@@ -51,12 +51,11 @@ export default function Widget({uid, x, y, size, headerColor = DEFAULT_HEADER_CO
     <Draggable handle='.handle' bounds='parent'>
         <div className={sizeClasses + ' absolute rounded border border-slate-600 flex flex-col'} style={style}>
 
-            <div className={`widget-header rounded-t border-b border-slate-600 flex justify-start items-center ${true ? currentHeaderColor : ''}`}>
+            <div className={`widget-header handle rounded-t border-b border-slate-600 flex justify-between items-center ${true ? currentHeaderColor : ''}`}>
                 <button className='cursor-pointer p-1 hover:bg-white hover:bg-opacity-20' onClick={toggleSettings}>
                     <IoEllipsisHorizontal className='opacity-80'/>
                 </button>
 
-                <div className='handle grow-1 h-full w-full'/>
 
                 <button className='cursor-pointer p-1 hover:bg-white hover:bg-opacity-20' >
                     <IoClose className='opacity-80' onClick={() => handleDelete(uid)}/>
