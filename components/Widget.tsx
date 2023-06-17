@@ -49,7 +49,7 @@ export default function Widget({uid, x, y, size, headerColor = DEFAULT_HEADER_CO
 
   return (
     <Draggable handle='.handle' bounds='parent'>
-        <div className={sizeClasses + ' absolute rounded border border-slate-600 flex flex-col'} style={style}>
+        <div className={sizeClasses + ' absolute rounded border border-slate-600 dark:border-black flex flex-col'} style={style}>
 
             <div className={`widget-header handle rounded-t border-b border-slate-600 flex justify-between items-center ${true ? currentHeaderColor : ''}`}>
                 <button className='cursor-pointer p-1 hover:bg-white hover:bg-opacity-20' onClick={toggleSettings}>
@@ -62,12 +62,12 @@ export default function Widget({uid, x, y, size, headerColor = DEFAULT_HEADER_CO
                 </button>
             </div>
 
-            <div className='widget-content relative flex flex-grow bg-gradient-to-b from-white to-blue-100'>
-                <div className={`settings-overlay flex flex-col gap-2 items-start bg-white p-2 z-20 absolute w-full h-full overflow-y-auto ${showSettings ? 'visible' : 'invisible'}`}>
+            <div className='widget-content rounded-b relative flex flex-grow bg-gradient-to-b from-white to-blue-100 dark:from-zinc-700 dark:to-zinc-800'>
+                <div className={`settings-overlay flex flex-col gap-2 items-start bg-white p-2 z-20 absolute w-full h-full overflow-y-auto dark:bg-zinc-700 dark:text-white ${showSettings ? 'visible' : 'invisible'}`}>
                     <ColorPicker label={'Header Color:'} color={currentHeaderColor} setColor={setCurrentHeaderColor}/>
                 </div>
 
-                <div className='widget-children h-full w-full'>
+                <div className='widget-children h-full w-full dark:text-gray-300 '>
                     {children}
                 </div>
             </div>

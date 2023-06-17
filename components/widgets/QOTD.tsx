@@ -26,7 +26,7 @@ export default function QOTD({x, y, uid} : Props){
 
     useEffect( () => {
         async function getQuote() {
-            const res = await fetch('/api/quote')
+            const res = await fetch('/api/quote', {cache: 'no-store'})
 
             if (res.ok) {
                 const body = await res.json()

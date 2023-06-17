@@ -2,6 +2,8 @@
 
 import React, {useState} from 'react'
 import Widget from '../Widget'
+import {AiFillPlusSquare} from 'react-icons/ai'
+import {TiDelete} from 'react-icons/ti'
 
 interface Props {
     x: number,
@@ -52,9 +54,11 @@ export default function Todo({x, y, uid}: Props) {
         <div className='w-full h-[50px] flex flex-col p-2 gap-2'>
             <div>
                 <label>New Todo:</label>
-                <div className='flex flex-row items-center gap-1'>
-                    <input type='text' className=' bg-white border-2 w-full' value={newTodo} onKeyDown={handleEnter} onChange={(e) => (setNewTodo(e.target.value))} />
-                    <button onClick={handleAddTodo} className='bg-green-400 px-1'>+</button>
+                <div className='flex flex-row items-center gap-2'>
+                    <input type='text' className=' bg-white border-2 dark:bg-zinc-900 dark:border-zinc-950 w-full' value={newTodo} onKeyDown={handleEnter} onChange={(e) => (setNewTodo(e.target.value))} />
+                    <button onClick={handleAddTodo} >
+                        <AiFillPlusSquare className='h-[22px] w-[22px] fill-green-400 dark:fill-gray-400'/>
+                    </button>
                 </div>
             </div>
 
@@ -63,7 +67,9 @@ export default function Todo({x, y, uid}: Props) {
                     <li key={todo.id} className='list-none flex justify-start items-center gap-1'>
                         <input id={todo.id} onChange={handleCheck} type='checkbox' checked={todo.completed} className='cursor-pointer' />
                         <label htmlFor={todo.id} className={`leading-tight text-sm ${todo.completed ? 'line-through' : ''}`}>{todo.name}</label>
-                        <button onClick={() => handleDelete(index)} className='text-red-400'>X</button>
+                        <button onClick={() => handleDelete(index)}>
+                            <TiDelete className='fill-red-400' />
+                        </button>
                     </li>
                 ))}
             </div>

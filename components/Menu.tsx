@@ -1,5 +1,8 @@
+"use client"
+
 import React, { useContext } from 'react'
 import { WidgetsContext } from './Dashboard'
+import {MdAddCircle} from 'react-icons/md'
 
 export default function Menu() {
     const {widgets, setWidgets} = useContext(WidgetsContext)
@@ -18,7 +21,9 @@ export default function Menu() {
   return (
     <ul className='fixed z-20 bottom-4 right-4 flex flex-col-reverse items-end gap-4 group'>
         <li>
-            <button className='rounded outline p-2'>NEW</button>
+            <button>
+                <MdAddCircle className='text-6xl fill-blue-600'/>
+            </button>
         </li>
         <li className='hidden group-hover:block'>
             <button onClick={() => addWidget('Clock')} className='rounded outline p-2'>Clock</button>
