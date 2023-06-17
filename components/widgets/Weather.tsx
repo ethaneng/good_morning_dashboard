@@ -27,7 +27,7 @@ export default function Weather({x, y, uid}: Props) {
 
     useEffect(() => {
         async function getWeather(lat: number, long: number) { 
-            const res = await fetch('/api/weather')
+            const res = await fetch(`/api/weather?lat=${lat}&long=${long}`)
             if (res.ok) {
                 const weather = await res.json()
                 setWeather({
