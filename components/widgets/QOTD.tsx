@@ -22,7 +22,7 @@ type Data = {
 
 export default function QOTD({x, y, uid} : Props){
 
-    const [data, setData] = useState<Data>({})
+    const [data, setData] = useState<Data | undefined>()
 
     useEffect( () => {
         async function getQuote() {
@@ -42,8 +42,16 @@ export default function QOTD({x, y, uid} : Props){
   return (
     <Widget x={x} y={y} size='big' uid={uid}>
         <div className="flex flex-col h-full w-full justify-center items-center p-4">
-            <span className="text-center text-xl italic">{`"${data.quote ? data.quote.quote : data.errorMsg}"`}</span>
-            <label className="self-end opacity-60">{data.quote && data.quote.author}</label>
+            {
+                data ? 
+                <>
+                    <span className="text-center text-xl italic">{`"${data.quote ? data.quote.quote : data.errorMsg}"`}</span>
+                    <label className="self-end opacity-60">{data.quote && data.quote.author}</label>
+                </>
+                :
+                <label>Getting Daily Quote...</label>
+            }
+
         </div>
     </Widget>
   )

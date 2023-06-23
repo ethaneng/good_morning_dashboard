@@ -79,7 +79,7 @@ export default function Weather({x, y, uid}: Props) {
 
   return (
     <Widget x={x} y={y} uid={uid} size='small'>
-        { weather &&
+        { weather ?
             <div className="h-full w-full flex flex-col items-center justify-center gap-1">
                 <label className="text-6xl">{weather.temp + '°C'}</label>
                 <div className="flex gap-2">
@@ -94,7 +94,10 @@ export default function Weather({x, y, uid}: Props) {
                 </div>
                 {weather.sample && <label className="text-xs opacity-50 text-center">Sample Data - Allow Location for Accurate Data</label>}
             </div>
-        }
+        : 
+        <div className="flex items-center justify-center h-full w-full">
+            <label>Getting Weather Data...</label>
+        </div>}
     </Widget>
   )
 }
