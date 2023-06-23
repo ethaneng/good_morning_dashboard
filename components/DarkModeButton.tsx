@@ -4,7 +4,7 @@ import {CiLight, CiDark} from 'react-icons/ci'
 import { ThemeContext } from './ThemeProvider'
 
 export default function DarkModeButton() {
-    const {darkMode, setDarkMode} = useContext(ThemeContext)
+    const {darkMode, setDarkMode} = useContext<any>(ThemeContext)
   return (
     <button onClick={() => setDarkMode(!darkMode)}>
         <div className={`flex items-center justify-center rounded-full p-2 gap-2 overflow-clip relative transition-colors ${darkMode ? 'bg-white' : 'bg-blue-600'}`}>
