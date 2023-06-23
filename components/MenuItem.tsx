@@ -5,7 +5,6 @@ import { WidgetsContext } from './Dashboard'
 type Props = {
     label: string,
     widget: string
-
 }
 
 export default function MenuItem({label, widget, children}: React.PropsWithChildren<Props>) {
